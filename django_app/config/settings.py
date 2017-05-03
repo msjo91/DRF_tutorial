@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'rest_framework',
 
     'member.apps.MemberConfig',
+    'snippets.apps.SnippetsConfig',
 ]
 
 REST_FRAMEWORK = {
