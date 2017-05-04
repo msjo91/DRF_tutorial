@@ -8,6 +8,7 @@ STYLE_CHOICES = style_choices()
 
 class SnippetSerializer(serializers.Serializer):
     id = serializers.IntegerField(read_only=True)
+    highlight = serializers.HyperlinkedIdentityField(view_name='snippet-highlight', format='html')
     owner = serializers.ReadOnlyField(source='owner.username')
     title = serializers.CharField(required=False, allow_blank=True, max_length=100)
     code = serializers.CharField(style={'base_template': 'textarea.html'})

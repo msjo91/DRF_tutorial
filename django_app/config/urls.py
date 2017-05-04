@@ -16,12 +16,12 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 from rest_framework import routers
-
-from member import views
+from rest_framework.urlpatterns import format_suffix_patterns
 
 # router = routers.DefaultRouter()
 # router.register(r'users', views.UserViewSet)
 # router.register(r'groups', views.GroupViewSet)
+from snippets.views import fbv
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -30,3 +30,5 @@ urlpatterns = [
     url(r'^snippets/', include('snippets.urls')),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]
+
+urlpatterns += format_suffix_patterns([url(r'^', fbv.api_root)])
