@@ -16,19 +16,20 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 from rest_framework import routers
-from rest_framework.urlpatterns import format_suffix_patterns
 
-# router = routers.DefaultRouter()
-# router.register(r'users', views.UserViewSet)
-# router.register(r'groups', views.GroupViewSet)
-from snippets.views import fbv
+from member.views import viewsets_cbv as member_view
+from snippets.views import viewsets_cbv as snippets_view
+
+router = routers.DefaultRouter()
+router.register(r'member', member_view.UserViewSet)
+router.register(r'snippets', snippets_view.SnippetViewSet)
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    # url(r'^', include(router.urls)),
-    url(r'^member/', include('member.urls.viewset_urls')),
-    url(r'^snippets/', include('snippets.urls.viewset_urls')),
-    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    url(r'^', include(router.urls)),
+    # url(r'^member/', include('member.urls.viewset_urls')),
+    # url(r'^snippets/', include('snippets.urls.viewset_urls')),
+    # url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]
 
-urlpatterns += format_suffix_patterns([url(r'^', fbv.api_root)])
+# urlpatterns += format_suffix_patterns([url(r'^', fbv.api_root)])
