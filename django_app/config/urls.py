@@ -26,8 +26,8 @@ from snippets.views import fbv
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     # url(r'^', include(router.urls)),
-    url(r'^member/', include('member.urls')),
-    url(r'^snippets/', include('snippets.urls')),
+    url(r'^member/', include('member.urls.viewset_urls')),
+    url(r'^snippets/', include('snippets.urls.viewset_urls')),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]
 
