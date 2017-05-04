@@ -1,13 +1,18 @@
+from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Group
 from rest_framework import serializers
 
-from .models import MyUser
+from snippets.models import Snippet
+
+User = get_user_model()
 
 
-class UserSerializer(serializers.HyperlinkedModelSerializer):
+class UserSerializer(serializers.ModelSerializer):
+    snippets = serializers.PrimaryKeyRelatedField(many=True, queryset=Snippet.objects.all())
+
     class Meta:
-        model = MyUser
-        fields = ('url', 'username', 'email', 'groups')
+        model = User
+        fields = ('id', 'username', 'snippets')
 
 
 class GroupSerializer(serializers.HyperlinkedModelSerializer):
